@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Science Exchange — Skilljar Scope Validation</title><style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef1f4;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#1A1A2E;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:28px 20px 64px}
+header{background:#0F274D;color:#fff;border-radius:10px;padding:26px 28px}
+.eyebrow{margin:0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:#AACCFF}
+header h1{margin:6px 0 2px;font-size:30px;letter-spacing:-.01em}
+.verdict{margin:0;font-size:15px;font-weight:700;
+  background:#fff;display:inline-block;padding:4px 12px;border-radius:99px;margin-top:8px}
+.scorecards{display:flex;gap:10px;margin:18px 0 0;flex-wrap:wrap}
+.score{background:#ffffff14;border:1px solid #ffffff2e;border-radius:8px;padding:10px 14px;
+  min-width:116px}
+.score b{display:block;font-size:22px;color:#fff}
+.score span{font-size:11px;color:#C9DBF2;text-transform:uppercase;letter-spacing:.06em}
+.meta{display:flex;gap:22px;margin-top:16px;flex-wrap:wrap;border-top:1px solid #ffffff2b;
+  padding-top:12px}
+.meta span{display:block;font-size:10px;color:#AACCFF;text-transform:uppercase;
+  letter-spacing:.08em}
+.meta strong{font-size:13px;color:#fff}
+section{background:#fff;border-radius:10px;padding:22px 26px;margin-top:16px;
+  border:1px solid #E3E6EA}
+section h2{margin:0;font-size:18px;color:#0F274D}
+.sub{margin:6px 0 16px;font-size:13px;color:#555555;line-height:1.55;max-width:74ch}
+h3.cat{margin:22px 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;
+  color:#0F274D;border-bottom:1px solid #E3E6EA;padding-bottom:6px}
+h3.cat span{float:right;font-weight:400;color:#555555;letter-spacing:0;text-transform:none}
+.pill{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.06em;padding:3px 8px;border-radius:99px;border:1px solid;white-space:nowrap}
+.finding{border-left:3px solid;background:#F7F9FC;border-radius:0 8px 8px 0;
+  padding:12px 16px;margin-bottom:10px}
+.fhead{display:flex;align-items:center;gap:10px}
+.fhead h3{margin:0;font-size:14px}
+.finding p{margin:6px 0 0;font-size:13px;color:#555555;line-height:1.6}
+table{width:100%;border-collapse:collapse}
+.checklist td{border-bottom:1px solid #E3E6EA;padding:10px 8px;vertical-align:top}
+.checklist td.st{width:96px}
+.checklist tr.s-gap .q,.checklist tr.s-assumed .q{font-weight:700}
+.q{font-size:13px;line-height:1.5}
+.val{font-size:13px;color:#1A1A2E;margin-top:4px;line-height:1.55}
+.val.open{color:#555555;font-style:italic}
+.extras{margin-top:4px;display:flex;gap:10px;flex-wrap:wrap}
+.src{font-size:11px;color:#8A93A0}
+.warnflag{font-size:11px;color:#C0392B;font-weight:700}
+.cards{display:flex;gap:14px;flex-wrap:wrap}
+.card{flex:1 1 380px;background:#F7F9FC;border:1px solid #E3E6EA;border-radius:8px;
+  padding:16px 18px}
+.ctitle{margin:0;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#555555}
+.cval{margin:2px 0 12px;font-size:22px;font-weight:700;color:#0F274D}
+.kv{display:flex;justify-content:space-between;gap:14px;font-size:12px;padding:5px 0;
+  border-bottom:1px dotted #E3E6EA}
+.kv span{color:#555555}
+.bullets{margin:10px 0 0;padding-left:18px}
+.bullets li{font-size:12.5px;color:#555555;line-height:1.6;margin-bottom:5px}
+.lead{margin:12px 0 0;font-size:12.5px;font-weight:700}
+.empty{font-size:13px;color:#555555;font-style:italic;margin:8px 0 0}
+.pricing th,.pricing td{border-bottom:1px solid #E3E6EA;padding:9px 8px;font-size:13px;
+  text-align:left}
+.pricing th{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#555555}
+.pricing .num{text-align:right;font-variant-numeric:tabular-nums}
+.pricing tfoot td{font-weight:700;border-bottom:none;border-top:2px solid #0F274D}
+.whyrow td{font-size:11.5px;color:#555555;padding-top:0;border-bottom:1px solid #E3E6EA;
+  line-height:1.55}
+.fine{font-size:11.5px;color:#555555;line-height:1.6}
+.sow{background:#FFF4DE;border:1px solid #E2A23A55;border-radius:8px;padding:12px 16px;
+  margin-bottom:10px}
+.sow h4{margin:0;font-size:14px;color:#0F274D}
+.sow h4 span{float:right;font-weight:700;color:#E2A23A}
+.sow p{margin:6px 0 0;font-size:12.5px;color:#555555;line-height:1.6}
+.sow .route{font-weight:700;color:#1A1A2E}
+.gate{display:flex;gap:10px;align-items:flex-start;padding:8px 0;
+  border-bottom:1px solid #E3E6EA}
+.dot{width:10px;height:10px;border-radius:99px;margin-top:4px;flex:0 0 auto}
+.gate strong{font-size:13px}
+.gate p{margin:2px 0 0;font-size:12px;color:#555555}
+a{color:#007AC2}
+@media print{
+  body{background:#fff}
+  .wrap{max-width:none;padding:0}
+  section{break-inside:auto;border-color:#ccc}
+  .finding,.card,.sow{break-inside:avoid}
+}
+</style></head><body><div class="wrap">
+<header>
+  <p class="eyebrow">Skilljar by Gainsight &middot; Scope Validation</p>
+  <h1>Science Exchange</h1>
+  <p class="verdict" style="color:#C0392B">Not ready for IM sign-off</p>
+  <div class="scorecards">
+    <div class="score"><b>17%</b><span>checklist answered</span></div>
+    <div class="score"><b>6/35</b><span>items confirmed</span></div>
+    <div class="score"><b style="color:#C0392B">12</b><span>blocking</span></div>
+    <div class="score"><b style="color:#E2A23A">3</b><span>to confirm</span></div>
+  </div>
+  <div class="meta"><div><span>Stage</span><strong>POC / pre-pricing</strong></div><div><span>AE</span><strong>Scott Rowley</strong></div><div><span>SC</span><strong>Alex Gordon</strong></div><div><span>Generated</span><strong>2026-09-18</strong></div></div>
+</header><section><h2>Findings</h2><p class="sub">Blocking items must be resolved before pricing is shown to the customer. Confirm items are assumptions worth a sentence in the handoff.</p>
+<div class="finding" style="border-left-color:#C0392B">
+  <div class="fhead"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Blocking</span><h3>Proposed Essentials does not cover the stated requirements</h3></div>
+  <p>Stated requirements force at least Professional. External Management is Professional and above. Student Managers ARE External Management — non-admins assigning courses, managing learners or viewing completions without full backend access. Professional and above.</p>
+</div>
+<div class="finding" style="border-left-color:#C0392B">
+  <div class="fhead"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Blocking</span><h3>Historical data import has no recorded answer</h3></div>
+  <p>Ask directly and record the answer. An unrecorded &#x27;no&#x27; is how a $3,000 migration ends up in a quote the customer already declined on a call.</p>
+</div>
+<div class="finding" style="border-left-color:#C0392B">
+  <div class="fhead"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Blocking</span><h3>No target launch date</h3></div>
+  <p>Every implementation package carries a target time to launch. Without a date there is no way to know whether the package can deliver it.</p>
+</div>
+<div class="finding" style="border-left-color:#C0392B">
+  <div class="fhead"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Blocking</span><h3>Functional discovery has not been reviewed by IM</h3></div>
+  <p>There is no functional discovery form earlier in the cycle, so this review has to happen before pricing is shown. Send it to Hannah, or bring it to office hours, ahead of the program validation slide.</p>
+</div>
+<div class="finding" style="border-left-color:#C0392B">
+  <div class="fhead"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Blocking</span><h3>Packaging: If multiple domains — same team configuring both, same general use case? And are all domains launching together at signature?</h3></div>
+  <p>No answer on record. Same team &amp; general use case is +$3k per domain; different team &amp; divergent use case is +$6k. Only at contract signature — a domain added after launch is a net new implementation package, not an add-on.</p>
+</div>
+<div class="finding" style="border-left-color:#C0392B">
+  <div class="fhead"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Blocking</span><h3>Theming: Does their team have a developer or front-end resource who can do custom CSS/JS?</h3></div>
+  <p>No answer on record. Yes → the customer owns theming completely. No → a custom UI project scoped with Technical Services. Every implementation package is out-of-the-box theming only. Point them at developer.skilljar.com first — canned snippets often remove the need for TS.</p>
+</div>
+<div class="finding" style="border-left-color:#C0392B">
+  <div class="fhead"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Blocking</span><h3>Integrations: Which integrations are required for launch vs. nice-to-have post-launch?</h3></div>
+  <p>No answer on record. The implementation package is sized on LAUNCH scope. An undifferentiated wish list either inflates the package or blows the timeline.</p>
+</div>
+<div class="finding" style="border-left-color:#C0392B">
+  <div class="fhead"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Blocking</span><h3>Process: Has scope been confirmed with the TPM team (async or at office hours)?</h3></div>
+  <p>No answer on record. The whole point: SCs confirm scope without needing a TPM on the call.</p>
+</div>
+<div class="finding" style="border-left-color:#C0392B">
+  <div class="fhead"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Blocking</span><h3>Packaging: What implementation package are you recommending?</h3></div>
+  <p>Recorded as an assumption (&#x27;Standard at minimum — SSO, live training, API and certification at launch plus a net new content build. Never discussed with the customer; the $12,500 figure quoted sits inside the Standard range.&#x27;) rather than a confirmed answer. One implementation package per customer use case / domain. Most deals land in Standard or Premium; Basic is rare.</p>
+</div>
+<div class="finding" style="border-left-color:#C0392B">
+  <div class="fhead"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Blocking</span><h3>Packaging: How many domains do you need to launch with?</h3></div>
+  <p>Recorded as an assumption (&#x27;1 preferred, using groups for suppliers vs. pharma. Two URLs off one backend was also discussed as an option. Not decided.&#x27;) rather than a confirmed answer. Drives both the product package and an implementation add-on. The most common scoping miss.</p>
+</div>
+<div class="finding" style="border-left-color:#C0392B">
+  <div class="fhead"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Blocking</span><h3>Audience: Do they need to group users in Skilljar — to segment analytics or to gate content on the front end? If so, is that metadata in their IdP and can they send it in the SSO handshake?</h3></div>
+  <p>Recorded as an assumption (&#x27;Plan is to use SSO metadata to auto-assign users into groups for segmentation. Positioned to the customer as achievable; never confirmed that the required attributes exist in their IdP or can be sent in the handshake.&#x27;) rather than a confirmed answer. Often make-or-break: no attributes means no grouping and no segmented reporting. Customers assume this works and discover it during implementation.</p>
+</div>
+<div class="finding" style="border-left-color:#C0392B">
+  <div class="fhead"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Blocking</span><h3>Timeline: Do they have content built, or will they be building it? What formats, and how much?</h3></div>
+  <p>Recorded as an assumption (&#x27;Net new build. SCORM and Articulate discussed as content formats. No library inventory or volume captured.&#x27;) rather than a confirmed answer. Skilljar does not import or migrate content. If they expect a library moved across, that is a TS content migration (~$21k). Building net new content also moves the implementation package up to Standard.</p>
+</div>
+<div class="finding" style="border-left-color:#E2A23A">
+  <div class="fhead"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Confirm</span><h3>Annualised MAU estimate is unknown</h3></div>
+  <p>An MAU is a unique learner by email who logs in AND consumes a lesson in a month — browsing or registering does not count — priced against an annualised pool. A customer&#x27;s &#x27;monthly&#x27; number is not the number to scope. Enterprise requires a 6,000 minimum.</p>
+</div>
+<div class="finding" style="border-left-color:#E2A23A">
+  <div class="fhead"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Confirm</span><h3>Certification is in scope but the vendor type is unknown</h3></div>
+  <p>Native Skilljar certificate of completion can stay at Standard; a third-party vendor (Credly, Accredible, Caveon, Examity, ProctorFree) or an exam-tied certification moves the implementation package to Premium. Also worth separating certificates of completion from true certifications with exams and recertification.</p>
+</div>
+<div class="finding" style="border-left-color:#E2A23A">
+  <div class="fhead"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Confirm</span><h3>Sales-to-service handoff not generated</h3></div>
+  <p>SC generates it at Stage 4 and sends it to Hannah or brings it to office hours (John C manages the process). Generate it earlier than Stage 4 so the IM review lands before pricing rather than after.</p>
+</div>
+<div class="finding" style="border-left-color:#007AC2">
+  <div class="fhead"><span class="pill" style="color:#007AC2;background:#E8F3FB;border-color:#007AC233">Note</span><h3>3 premium slot(s): Salesforce, Zoom, REST API</h3></div>
+  <p>Salesforce and the live-training tools (Zoom, Webex, GoTo) are Premium integrations AND they force Standard implementation — two separate consequences.</p>
+</div>
+<div class="finding" style="border-left-color:#007AC2">
+  <div class="fhead"><span class="pill" style="color:#007AC2;background:#E8F3FB;border-color:#007AC233">Note</span><h3>Student Manager / External Management is a Professional gate</h3></div>
+  <p>Non-admins assigning courses, managing learners or viewing completions without full backend access is External Management — Professional and above. Effective tier is Professional. Verify against the feature list rather than the conversation; this combination has shipped as Essentials and surfaced during implementation.</p>
+</div>
+<div class="finding" style="border-left-color:#007AC2">
+  <div class="fhead"><span class="pill" style="color:#007AC2;background:#E8F3FB;border-color:#007AC233">Note</span><h3>Expectation to set: The Salesforce integration is ONE-DIRECTIONAL (Skilljar → SF…</h3></div>
+  <p>The Salesforce integration is ONE-DIRECTIONAL (Skilljar → SFDC). SFDC → Skilljar requires a custom API build the customer owns. Any FDD that says &#x27;bi-directional Salesforce integration&#x27;.</p>
+</div>
+<div class="finding" style="border-left-color:#007AC2">
+  <div class="fhead"><span class="pill" style="color:#007AC2;background:#E8F3FB;border-color:#007AC233">Note</span><h3>Expectation to set: ILT attendance is tracked when the learner clicks &#x27;Launch&#x27; i…</h3></div>
+  <p>ILT attendance is tracked when the learner clicks &#x27;Launch&#x27; in Skilljar — NOT automatically after the Zoom/Webex session ends. Any deal with ILT/VILT in scope.</p>
+</div></section><section><h2>Recommendation</h2><p class="sub">Product package scoping and implementation scoping are separate questions with separate rules. Both are shown with the requirement that drove them.</p>
+<div class="cards">
+  <div class="card">
+    <p class="ctitle">Product package</p>
+    <p class="cval">Professional</p>
+    <div class="kv"><span>SC proposed</span><strong style="color:#C0392B">Essentials — does not cover the stated requirements</strong></div>
+    <div class="kv"><span>Requirements force at least</span><strong>Professional</strong></div>
+    <div class="kv"><span>Production domains included</span><strong>2</strong></div>
+    <div class="kv"><span>Admin roles</span><strong>14</strong></div>
+    <div class="kv"><span>Premium integrations</span><strong>5 included / 3 needed</strong></div>
+    <ul class="bullets"><li><strong>Professional</strong> — External Management is Professional and above.</li><li><strong>Professional</strong> — Student Managers ARE External Management — non-admins assigning courses, managing learners or viewing completions without full backend access. Professional and above.</li><li><strong>Essentials</strong> — Role-Based Access Control is included from Essentials, but Essentials caps at 6 role types. All role types requires Professional or above — the gate is the count, not the feature.</li><li><strong>Essentials</strong> — Custom Themes start at Essentials.</li><li><strong>Essentials</strong> — Custom Domain Name starts at Essentials.</li><li><strong>Essentials</strong> — Virtual ILT starts at Essentials.</li></ul>
+    
+  </div>
+  <div class="card">
+    <p class="ctitle">Implementation package</p>
+    <p class="cval">Standard &middot; $12,000</p>
+    
+    <div class="kv"><span>Requirements force at least</span><strong>Standard</strong></div>
+    <div class="kv"><span>Hours / target launch</span><strong>up to 60 hrs &middot; 100 days</strong></div>
+    <div class="kv"><span>Calls</span><strong>8 milestone &middot; 6 ad-hoc</strong></div>
+    <div class="kv"><span>Launch integrations needed</span><strong>api, live_training, salesforce, sso</strong></div>
+    
+    <ul class="bullets"><li><strong>Standard</strong> — Launch integrations requiring this tier: api, live_training, sso</li><li><strong>Standard</strong> — Building net new content is suited to Standard and above.</li></ul>
+  </div>
+</div></section><section><h2>Pricing implications</h2>
+<table class="pricing">
+  <thead><tr><th>Implementation line</th><th class="num">Qty</th>
+    <th class="num">List</th><th class="num">Subtotal</th></tr></thead>
+  <tbody><tr><td>Standard Implementation</td><td class="num">1</td><td class="num">$12,000</td><td class="num">$12,000</td></tr></tbody>
+  <tfoot><tr><td colspan="3">Implementation subtotal (list)</td>
+    <td class="num">$12,000</td></tr></tfoot>
+</table>
+
+<p class="fine">List pricing must be entered in CPQ and then discounted where necessary
+(CPQ shows $0). AEs are empowered to 10%; deeper
+discounts are rare exceptions. Rack rate $275/hr.</p><h3 class="cat">Separate SOW — not in any implementation package</h3><div class="sow"><h4>SSO+ <span>$5k at signature / $7.5k post-live</span></h4><p>More than one authentication method on a single domain — e.g. SSO plus native Skilljar login, two SAML configs, or partners on a different IdP than customers on the same domain.</p><p class="route">Route to: David Peček (david.pecek@skilljar.com)</p><p class="route">Check first: SSO+ is expected to become self-serve in the product. Confirm current status before pricing a TS engagement.</p></div></section><section><h2>Domain boundary</h2><p class="sub">Customers with several domains blend the requirements together. This scope covers one domain; anything belonging to another one has to come out before it reaches a quote.</p><div class="kv"><span>Domain being implemented</span><strong>Science Exchange academy (single domain, name TBD)</strong></div><p class="empty">Every recorded requirement is attributed to the domain being implemented.</p></section><section><h2>Expectations to set</h2><p class="sub">Not scope items and not priced — these are the places customers reliably assume the product works differently than it does. Raising them now is free; raising them at launch is not.</p><div class="sow" style="background:#E8F3FB;border-color:#007AC244"><h4>Sfdc Directionality</h4><p>The Salesforce integration is ONE-DIRECTIONAL (Skilljar → SFDC). SFDC → Skilljar requires a custom API build the customer owns.</p><p class="route">Flag when: Any FDD that says &#x27;bi-directional Salesforce integration&#x27;.</p></div><div class="sow" style="background:#E8F3FB;border-color:#007AC244"><h4>Ilt Attendance</h4><p>ILT attendance is tracked when the learner clicks &#x27;Launch&#x27; in Skilljar — NOT automatically after the Zoom/Webex session ends.</p><p class="route">Flag when: Any deal with ILT/VILT in scope.</p></div></section><section><h2>IM vetting checklist</h2><p class="sub">The fixed question set the Implementation Management team asks. Every item shows where its answer came from.</p><h3 class="cat">Packaging <span>3 answered &middot; 4 assumed &middot; 6 gap</span></h3><table class="checklist">
+<tr class="s-answered">
+  <td class="st"><span class="pill" style="color:#2E9E6B;background:#E6F5EE;border-color:#2E9E6B33">Answered</span></td>
+  <td><div class="q">What Skilljar product package are you recommending?</div><div class="val">Essentials — indicative year one $58,000–$63,000: ~$49,000 software for 1,200 learners plus $12,500 implementation.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Workshop, 2026-09-02</span></div></td>
+</tr>
+<tr class="s-answered">
+  <td class="st"><span class="pill" style="color:#2E9E6B;background:#E6F5EE;border-color:#2E9E6B33">Answered</span></td>
+  <td><div class="q">Do non-admin users (customer admins, partner managers, team leads) need to assign courses, manage learners, or view completions without full backend access?</div><div class="val">Yes — pharma customer admins are to see their own scientists&#x27; onboarding progress and course completions for their group, via external/student manager roles or a front-end experience.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Sync, 2026-09-08 / Workshop, 2026-09-02</span></div></td>
+</tr>
+<tr class="s-answered">
+  <td class="st"><span class="pill" style="color:#2E9E6B;background:#E6F5EE;border-color:#2E9E6B33">Answered</span></td>
+  <td><div class="q">Do they expect Student Manager access, and does their package include it?</div><div class="val">Yes — explicitly discussed and positioned to the customer as the way pharma admins track their teams. Not present in Essentials.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Workshop, 2026-09-02</span></div></td>
+</tr>
+<tr class="s-assumed">
+  <td class="st"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Assumed</span></td>
+  <td><div class="q">What implementation package are you recommending?</div><div class="val">Standard at minimum — SSO, live training, API and certification at launch plus a net new content build. Never discussed with the customer; the $12,500 figure quoted sits inside the Standard range.</div>
+      <div class="extras"><span class="src">SC derivation from Gong record, 2026-09-18</span></div></td>
+</tr>
+<tr class="s-assumed">
+  <td class="st"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Assumed</span></td>
+  <td><div class="q">How many domains do you need to launch with?</div><div class="val">1 preferred, using groups for suppliers vs. pharma. Two URLs off one backend was also discussed as an option. Not decided.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Sync, 2026-09-08</span></div></td>
+</tr>
+<tr class="s-assumed">
+  <td class="st"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Assumed</span></td>
+  <td><div class="q">How many Premium integrations do they need? (REST API counts as one, and everything it enables is then free.)</div><div class="val">3 identified (Salesforce managed package, Zoom, REST API/webhooks) against 3 included in Essentials — at the cap with no headroom. S3 data lake export not classified.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Workshop, 2026-09-02</span></div></td>
+</tr>
+<tr class="s-assumed">
+  <td class="st"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Assumed</span></td>
+  <td><div class="q">What is the expected active learner volume, annualised?</div><div class="val">1,200 annual learners quoted. Underlying population is far larger: 1,500 suppliers (300 active) plus thousands of pharma scientists. The quoted figure is a starting assumption, not a validated forecast.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Workshop, 2026-09-02</span></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">If multiple domains — same team configuring both, same general use case? And are all domains launching together at signature?</div><div class="val open">Same team &amp; general use case is +$3k per domain; different team &amp; divergent use case is +$6k. Only at contract signature — a domain added after launch is a net new implementation package, not an add-on.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Do admin users need to log into the Skilljar dashboard via SSO?</div><div class="val open">Admin Dashboard SSO is Professional or Enterprise only. Essentials admins can only use username/password. Distinct from learner SSO.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">How many dashboard admin role types do they need?</div><div class="val open">More than 6 (Essentials) requires Professional or Enterprise.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Do they distribute training content to external organisations (partners, customers, resellers) who have their own separate Skilljar instances?</div><div class="val open">Professional/Enterprise included, or an $11k add-on on Essentials. This is NOT the same as making a course publicly available.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Do they sell or distribute training in bundled seat packages — e.g. 50 seats of a course for a team, or reselling to customers?</div><div class="val open">Professional or Enterprise only. Different from simple course purchasing, which is on every tier.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Are they purchasing language packs?</div><div class="val open">One pack is included at every tier. 5 packs $11k; all packs $22k–$33k. Packs update UI string text only.</div>
+      <div class="extras"></div></td>
+</tr></table><h3 class="cat">Audience <span>2 answered &middot; 2 assumed &middot; 0 gap</span></h3><table class="checklist">
+<tr class="s-answered">
+  <td class="st"><span class="pill" style="color:#2E9E6B;background:#E6F5EE;border-color:#2E9E6B33">Answered</span></td>
+  <td><div class="q">Who are the learner audiences — customers, partners, internal employees, prospects, or a mix? Do they share content?</div><div class="val">Suppliers and pharma-side users, split further into new-to-Science-Exchange users, new admins, pharma scientists, pharma procurement teams, dormant pharma accounts, and salespeople. Internal employee training deferred to a later phase.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Workshop, 2026-09-02 / POC Prep, 2026-09-14</span></div></td>
+</tr>
+<tr class="s-answered">
+  <td class="st"><span class="pill" style="color:#2E9E6B;background:#E6F5EE;border-color:#2E9E6B33">Answered</span></td>
+  <td><div class="q">Can all learners log in via the same SSO protocol, on the same domain?</div><div class="val">Mix of SSO and self-registration on the same site, with more than one SSO form supported simultaneously. Microsoft Azure named as a likely IdP.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Workshop, 2026-09-02</span></div></td>
+</tr>
+<tr class="s-assumed">
+  <td class="st"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Assumed</span></td>
+  <td><div class="q">Do they need to group users in Skilljar — to segment analytics or to gate content on the front end? If so, is that metadata in their IdP and can they send it in the SSO handshake?</div><div class="val">Plan is to use SSO metadata to auto-assign users into groups for segmentation. Positioned to the customer as achievable; never confirmed that the required attributes exist in their IdP or can be sent in the handshake.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Sync, 2026-09-08</span></div></td>
+</tr>
+<tr class="s-assumed">
+  <td class="st"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Assumed</span></td>
+  <td><div class="q">Is the site public, gated, SSO-only, or mixed?</div><div class="val">Mixed — gated by group, with domain membership tailored by email domain. Grace Speaks also raised embedding the learning hub inside the Science Exchange product behind SSO.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Sync, 2026-09-08</span></div></td>
+</tr></table><h3 class="cat">Timeline <span>1 answered &middot; 1 assumed &middot; 2 gap</span></h3><table class="checklist">
+<tr class="s-answered">
+  <td class="st"><span class="pill" style="color:#2E9E6B;background:#E6F5EE;border-color:#2E9E6B33">Answered</span></td>
+  <td><div class="q">Gen 1 or Gen 2 — is this their first LMS, or are they migrating? If migrating, from what, and why are they leaving?</div><div class="val">Gen 1 — first generation academy, not replacing an incumbent LMS. Two stakeholders have prior LMS experience elsewhere.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Scott Rowley intro, 2026-08-27</span></div></td>
+</tr>
+<tr class="s-assumed">
+  <td class="st"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Assumed</span></td>
+  <td><div class="q">Do they have content built, or will they be building it? What formats, and how much?</div><div class="val">Net new build. SCORM and Articulate discussed as content formats. No library inventory or volume captured.</div>
+      <div class="extras"><span class="src">Gong: Workshop, 2026-09-02 / Sync, 2026-09-08</span></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">What is the target launch date? Any hard external dependencies — contract end dates, events?</div><div class="val open">Lead time to START implementation is about 4 weeks, and packages then target 60/100/120/140 days. Customers typically take 90–120 days to launch. A date inside that window is a scope conflict, not a stretch goal.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Do they want to bring over historical learner enrollment and completion data?</div><div class="val open">$3k standard import, separate SOW. Ask directly and record the answer — an unrecorded &#x27;no&#x27; is how a migration ends up in a quote the customer already declined on a call.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-not_applicable">
+  <td class="st"><span class="pill" style="color:#555555;background:#EEF1F4;border-color:#55555533">N/A</span></td>
+  <td><div class="q">If migrating data: course-level completions only, or lesson-level progress too? Quiz banks? Live training or learning path completions? What record volume?</div><div class="val">Gen 1 — no incumbent LMS to migrate from. Reconfirm alongside the historical_data question.</div>
+      <div class="extras"></div></td>
+</tr></table><h3 class="cat">Theming <span>0 answered &middot; 1 assumed &middot; 1 gap</span></h3><table class="checklist">
+<tr class="s-assumed">
+  <td class="st"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Assumed</span></td>
+  <td><div class="q">Do they want to re-use their POC site? Is there a POC org to repurpose?</div><div class="val">Branded POC built and demoed 2026-09-15; reuse in production is the natural path but has not been confirmed or assigned.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15</span></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Does their team have a developer or front-end resource who can do custom CSS/JS?</div><div class="val open">Yes → the customer owns theming completely. No → a custom UI project scoped with Technical Services. Every implementation package is out-of-the-box theming only. Point them at developer.skilljar.com first — canned snippets often remove the need for TS.</div>
+      <div class="extras"></div></td>
+</tr></table><h3 class="cat">Integrations <span>0 answered &middot; 2 assumed &middot; 6 gap</span></h3><table class="checklist">
+<tr class="s-assumed">
+  <td class="st"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Assumed</span></td>
+  <td><div class="q">Are they launching a certification program? Native Skilljar certs or a third party (Credly, Accredible, Caveon, Examity, ProctorFree)? Certificates of completion, or true certifications tied to an exam and recertification?</div><div class="val">Certification is in scope, with certification data flowing out over webhooks/API. Native Skilljar certificates vs. a third-party vendor has not been established.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Workshop, 2026-09-02</span></div></td>
+</tr>
+<tr class="s-assumed">
+  <td class="st"><span class="pill" style="color:#E2A23A;background:#FFF4DE;border-color:#E2A23A33">Assumed</span></td>
+  <td><div class="q">Are they launching with any live training? Which platform — Zoom, Webex, GoTo?</div><div class="val">Zoom for instructor-led training named as an integration; Teams also mentioned. Not confirmed as launch scope.</div>
+      <div class="extras"><span class="src">Gong: LMS Branded POC, 2026-09-15 / Sync, 2026-09-08</span></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Which integrations are required for launch vs. nice-to-have post-launch?</div><div class="val open">The implementation package is sized on LAUNCH scope. An undifferentiated wish list either inflates the package or blows the timeline.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Does the customer understand the directionality and limits of what they are buying — one-way SFDC, ILT attendance on &#x27;Launch&#x27; click, PX interim approach, SCORM time-tracking?</div><div class="val open">These are the expectation mismatches that burn implementations. Salesforce is one-directional (SJ → SFDC) and &#x27;bi-directional&#x27; in an FDD is a red flag. ILT attendance is tracked when the learner clicks Launch, not when the Zoom session ends. There is no productised PX integration yet.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Does the customer understand Skilljar consults on APIs but does not build them? Who owns the dev work on their side?</div><div class="val open">If they expect Skilljar to build a sync, webhook or provisioning flow, that is a TS automation buildout (~$9k) or API advisory ($1.5k–$4k), not implementation.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Are they monetizing their program at launch? Which payment processor? Single or multiple currencies?</div><div class="val open">Any monetization moves the implementation package to Premium. Multi-currency moves the product package to Professional.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">When they say they need a language — do they mean translated course content, or the navigation and site interface changing dynamically by language?</div><div class="val open">Language packs are UI string text only. A truly multilingual site is a TS localization deployment (~$18.5k–$20k). Most customers who say &#x27;localization&#x27; need the TS version — probe carefully.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Do they already own Gainsight CS, PX, or Customer Communities? Who is scoping those, and which system is the source of truth?</div><div class="val open">CS changes whether SFDC or CS drives the integration and who owns which side. PX has no productised integration yet. Customer Communities (federated search, unified login, education widgets) is TS scope.</div>
+      <div class="extras"></div></td>
+</tr></table><h3 class="cat">Process <span>0 answered &middot; 0 assumed &middot; 4 gap</span></h3><table class="checklist">
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Has the running FDD Q&amp;A log been checked for prior answers on this deal?</div><div class="val open">The TPM team keeps a per-deal Q&amp;A log. Asking a question Sales already answered costs credibility and a round trip.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Has the functional discovery been sent to the TPM team for review?</div><div class="val open">There is no functional discovery form happening earlier in the cycle, so this review has to happen BEFORE pricing is shown. Questions go back to the SC in the customer Slack channel.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Has the sales-to-service handoff been generated in Salesforce?</div><div class="val open">SC generates it at Stage 4 and sends it to the TPM team or brings it to office hours. In practice it needs generating earlier than Stage 4 so the review lands before pricing.</div>
+      <div class="extras"></div></td>
+</tr>
+<tr class="s-gap">
+  <td class="st"><span class="pill" style="color:#C0392B;background:#FCE8E6;border-color:#C0392B33">Gap</span></td>
+  <td><div class="q">Has scope been confirmed with the TPM team (async or at office hours)?</div><div class="val open">The whole point: SCs confirm scope without needing a TPM on the call.</div>
+      <div class="extras"></div></td>
+</tr></table></section><section><h2>Process gates</h2><p class="sub">The functional discovery review has to land before pricing is shown. The sales-to-service handoff is generated by the SC and sent to Hannah or brought to office hours.</p><div class="gate"><span class="dot" style="background:#C0392B"></span><div><strong>Functional discovery sent to Hannah</strong></div></div><div class="gate"><span class="dot" style="background:#C0392B"></span><div><strong>Sales-to-service handoff generated in Salesforce</strong></div></div><div class="gate"><span class="dot" style="background:#C0392B"></span><div><strong>Scope confirmed with IM</strong></div></div></section><section><h2>Sources</h2><ul class="bullets"><li><strong>gong</strong> — <a href="https://us-30749.app.gong.io/call?id=8697969009300516171">Meet with Scott Rowley from Gainsight</a> <span class="src">2026-08-27</span></li><li><strong>gong</strong> — <a href="https://us-30749.app.gong.io/call?id=6253911522215347080">Skilljar x ScienceExchange Workshop</a> <span class="src">2026-09-02</span></li><li><strong>gong</strong> — <a href="https://us-30749.app.gong.io/call?id=7999122851670928257">ScienceExchange x Skilljar Sync</a> <span class="src">2026-09-08</span></li><li><strong>gong</strong> — <a href="https://us-30749.app.gong.io/call?id=8694411194687478002">Skilljar POC Prep Meeting x ScienceExchange</a> <span class="src">2026-09-14</span></li><li><strong>gong</strong> — <a href="https://us-30749.app.gong.io/call?id=7331921647723791520">Skilljar LMS Branded POC x ScienceExchange</a> <span class="src">2026-09-15</span></li><li><strong>email</strong> — Skilljar Proof of Concept thread <span class="src">2026-09-02</span></li></ul><h3 class="cat">Pricing caveats</h3><ul class="bullets fine"><li>Implementation Packages Q2 FY26 (July 2025) describes itself as an experiment; prices were expected to move. Re-check before quoting.</li><li>Implementation discount: AEs are empowered to 10%; 20% is the stated max and a rare exception. CPQ shows $0 — enter list pricing, then discount.</li><li>Implementation package price RANGES from the TPM rubric are wider than the Q2 FY26 single figures (Standard $12k–$17k, Premium $14k–$22k, Enterprise $16k–$27.5k). Confirm the exact figure with the AE/SC — there has been pricing evolution.</li><li>SSO+ is expected to become self-serve in the product. Confirm status before pricing it as a TS engagement.</li></ul></section></div></body></html>
